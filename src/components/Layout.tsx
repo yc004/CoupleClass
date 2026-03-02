@@ -1,5 +1,5 @@
-import { Outlet, NavLink, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
-import { Calendar, Users, Settings as SettingsIcon, Menu, X } from 'lucide-react';
+import { Outlet, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { Calendar, Users, Settings as SettingsIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SettingsModal from './SettingsModal';
 import { cn } from '../lib/utils';
@@ -7,7 +7,6 @@ import { useStore } from '../store';
 
 export default function Layout() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,11 +24,6 @@ export default function Layout() {
       }
     }
   }, [searchParams, navigate, setPartnerCode, setSearchParams]);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
 
   // Push local changes to server for real-time sync
   useEffect(() => {
@@ -68,91 +62,49 @@ export default function Layout() {
     return () => ws.close();
   }, [myShareCode, partnerCode, setPartnerSchedule]);
 
+  const isCoupleMode = location.pathname === '/couple';
+
   return (
-    <div className="h-screen h-[100dvh] bg-stone-50 text-stone-900 font-sans flex flex-col md:flex-row overflow-hidden">
-      {/* Mobile Header */}
-      <header className="md:hidden bg-white border-b border-stone-200 px-4 py-3 flex items-center justify-between z-20 shrink-0">
+    <div className="h-screen h-[100dvh] text-stone-900 font-sans flex flex-col overflow-hidden relative">
+      {/* Header */}
+      <header className="glass-header px-4 py-3 flex items-center justify-between z-20 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-xl">
+          <div className="w-8 h-8 rounded-xl bg-emerald-500/90 flex items-center justify-center text-white font-bold text-xl shadow-sm">
             S
           </div>
           <h1 className="text-xl font-semibold tracking-tight">同步课表</h1>
         </div>
         <button 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 -mr-2 text-stone-600 hover:bg-stone-100 rounded-xl transition-colors"
+          onClick={() => setIsSettingsOpen(true)}
+          className="p-2 text-stone-600 hover:bg-stone-200/50 rounded-xl transition-colors"
+          title="设置"
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <SettingsIcon className="w-6 h-6" />
         </button>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="md:hidden fixed inset-0 bg-black/20 z-10 backdrop-blur-sm"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar / Mobile Menu */}
-      <aside className={cn(
-        "fixed md:static inset-y-0 left-0 z-20 w-64 bg-white border-r border-stone-200 p-4 flex flex-col gap-2 transition-transform duration-300 ease-in-out md:transform-none",
-        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
-        <div className="hidden md:flex items-center gap-2 px-2 py-4 mb-4">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-xl">
-            S
-          </div>
-          <h1 className="text-xl font-semibold tracking-tight">同步课表</h1>
-        </div>
-
-        <nav className="flex-1 flex flex-col gap-1 mt-14 md:mt-0">
-          <NavLink
-            to="/"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${
-                isActive
-                  ? 'bg-emerald-50 text-emerald-700 font-medium'
-                  : 'text-stone-600 hover:bg-stone-100'
-              }`
-            }
-          >
-            <Calendar className="w-5 h-5" />
-            我的课表
-          </NavLink>
-          <NavLink
-            to="/couple"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${
-                isActive
-                  ? 'bg-emerald-50 text-emerald-700 font-medium'
-                  : 'text-stone-600 hover:bg-stone-100'
-              }`
-            }
-          >
-            <Users className="w-5 h-5" />
-            情侣课表
-          </NavLink>
-        </nav>
-
-        <button
-          onClick={() => {
-            setIsSettingsOpen(true);
-            setIsMobileMenuOpen(false);
-          }}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-600 hover:bg-stone-100 transition-colors mt-auto"
-        >
-          <SettingsIcon className="w-5 h-5" />
-          设置
-        </button>
-      </aside>
-
       {/* Main Content */}
-      <main className="flex-1 overflow-hidden bg-stone-50/50 flex flex-col relative">
+      <main className="flex-1 overflow-hidden flex flex-col relative">
         <Outlet />
       </main>
+
+      {/* Floating Action Button for Mode Switch */}
+      <button
+        onClick={() => navigate(isCoupleMode ? '/' : '/couple')}
+        className="absolute bottom-6 right-6 z-30 flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-500/90 backdrop-blur-md text-white rounded-full shadow-lg border border-white/20 hover:bg-emerald-600/90 hover:scale-105 active:scale-95 transition-all"
+      >
+        {isCoupleMode ? (
+          <>
+            <Calendar className="w-5 h-5" />
+            <span className="font-medium">我的课表</span>
+          </>
+        ) : (
+          <>
+            <Users className="w-5 h-5" />
+            <span className="font-medium">情侣课表</span>
+          </>
+        )}
+      </button>
 
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </div>
