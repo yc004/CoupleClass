@@ -24,7 +24,7 @@ const COLORS = [
 export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAddCourse, onEditCourse }: ScheduleGridProps) {
   const { mySchedule: { settings } } = useStore();
   const days = settings.showWeekends ? 7 : 5;
-  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
   const getPeriodTime = (period: number) => {
     const [hours, minutes] = settings.startTime.split(':').map(Number);
@@ -39,7 +39,7 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
       {/* Header */}
       <div className="grid border-b border-stone-200 bg-stone-50/80" style={{ gridTemplateColumns: `60px repeat(${days}, minmax(0, 1fr))` }}>
         <div className="p-3 text-center text-xs font-medium text-stone-400 uppercase tracking-wider border-r border-stone-200">
-          Time
+          时间
         </div>
         {Array.from({ length: days }).map((_, i) => (
           <div key={i} className="p-3 text-center text-sm font-semibold text-stone-700 border-r border-stone-200 last:border-r-0">
@@ -128,7 +128,7 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                       className="m-1 rounded-xl bg-emerald-50/50 border border-emerald-100/50 flex items-center justify-center pointer-events-none z-0"
                       style={{ gridColumn: day + 1, gridRow: period }}
                     >
-                      <span className="text-[10px] font-medium text-emerald-600/40 uppercase tracking-wider">Both Free</span>
+                      <span className="text-[10px] font-medium text-emerald-600/40 uppercase tracking-wider">共同空闲</span>
                     </div>
                   );
                 }
@@ -145,7 +145,7 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                       className="m-1 p-2 rounded-xl bg-purple-100 border border-purple-200 flex flex-col justify-center items-center text-center z-10 shadow-sm"
                       style={{ gridColumn: day + 1, gridRow: `${period} / span ${span}` }}
                     >
-                      <span className="text-xs font-bold text-purple-800 mb-1">Together! ✨</span>
+                      <span className="text-xs font-bold text-purple-800 mb-1">一起上课！✨</span>
                       <span className="text-xs font-semibold text-purple-700 line-clamp-2">{myCourse.name}</span>
                       <span className="text-[10px] text-purple-600 mt-1">📍 {myCourse.location}</span>
                     </div>
@@ -160,13 +160,13 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                   >
                     {myCourse && period === myCourse.startPeriod && (
                       <div className={cn("flex-1 rounded-lg p-1.5 text-[10px] border leading-tight shadow-sm", myCourse.color || COLORS[0])}>
-                        <div className="font-bold truncate">Me: {myCourse.name}</div>
+                        <div className="font-bold truncate">我: {myCourse.name}</div>
                         <div className="opacity-80 truncate">{myCourse.location}</div>
                       </div>
                     )}
                     {partnerCourse && period === partnerCourse.startPeriod && (
                       <div className="flex-1 rounded-lg p-1.5 text-[10px] border bg-stone-100 text-stone-700 border-stone-200 leading-tight shadow-sm">
-                        <div className="font-bold truncate">Partner: {partnerCourse.name}</div>
+                        <div className="font-bold truncate">TA: {partnerCourse.name}</div>
                         <div className="opacity-80 truncate">{partnerCourse.location}</div>
                       </div>
                     )}
@@ -180,4 +180,3 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
     </div>
   );
 }
-

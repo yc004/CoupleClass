@@ -7,6 +7,7 @@ interface AppState {
   mySchedule: ScheduleData;
   partnerSchedule: ScheduleData | null;
   myShareCode: string | null;
+  partnerCode: string | null;
   
   // Actions
   addCourse: (course: Omit<Course, 'id'>) => void;
@@ -15,6 +16,7 @@ interface AppState {
   updateSettings: (settings: Partial<Settings>) => void;
   setPartnerSchedule: (schedule: ScheduleData | null) => void;
   setMyShareCode: (code: string) => void;
+  setPartnerCode: (code: string | null) => void;
 }
 
 const defaultSettings: Settings = {
@@ -34,6 +36,7 @@ export const useStore = create<AppState>()(
       },
       partnerSchedule: null,
       myShareCode: null,
+      partnerCode: null,
 
       addCourse: (course) =>
         set((state) => ({
@@ -71,12 +74,14 @@ export const useStore = create<AppState>()(
 
       setPartnerSchedule: (schedule) => set({ partnerSchedule: schedule }),
       setMyShareCode: (code) => set({ myShareCode: code }),
+      setPartnerCode: (code) => set({ partnerCode: code }),
     }),
     {
       name: 'syncedu-storage',
       partialize: (state) => ({
         mySchedule: state.mySchedule,
         myShareCode: state.myShareCode,
+        partnerCode: state.partnerCode,
       }), // Don't persist partner schedule, load it fresh
     }
   )

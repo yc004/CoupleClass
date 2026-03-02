@@ -22,7 +22,7 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-5 border-b border-stone-100">
-          <h2 className="text-xl font-semibold text-stone-800">Schedule Settings</h2>
+          <h2 className="text-xl font-semibold text-stone-800">课表设置</h2>
           <button onClick={onClose} className="p-2 -mr-2 text-stone-400 hover:text-stone-600 rounded-full hover:bg-stone-100 transition-colors">
             <X className="w-5 h-5" />
           </button>
@@ -32,8 +32,8 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
           {/* Show Weekends */}
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-medium text-stone-800">Show Weekends</h3>
-              <p className="text-sm text-stone-500">Display Saturday and Sunday</p>
+              <h3 className="font-medium text-stone-800">显示周末</h3>
+              <p className="text-sm text-stone-500">在课表中显示周六和周日</p>
             </div>
             <button
               onClick={() => setLocalSettings({ ...localSettings, showWeekends: !localSettings.showWeekends })}
@@ -51,7 +51,7 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
 
           {/* Total Periods */}
           <div>
-            <label className="block font-medium text-stone-800 mb-1">Total Periods per Day</label>
+            <label className="block font-medium text-stone-800 mb-1">每日总节数</label>
             <input
               type="number"
               min="1"
@@ -64,7 +64,7 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
 
           {/* Class Duration */}
           <div>
-            <label className="block font-medium text-stone-800 mb-1">Class Duration (minutes)</label>
+            <label className="block font-medium text-stone-800 mb-1">每节课时长（分钟）</label>
             <input
               type="number"
               min="10"
@@ -77,7 +77,7 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
 
           {/* Start Time */}
           <div>
-            <label className="block font-medium text-stone-800 mb-1">First Class Start Time</label>
+            <label className="block font-medium text-stone-800 mb-1">第一节课开始时间</label>
             <input
               type="time"
               value={localSettings.startTime}
@@ -92,13 +92,13 @@ export default function SettingsModal({ isOpen, onClose }: { isOpen: boolean; on
             onClick={onClose}
             className="px-5 py-2.5 text-stone-600 font-medium hover:bg-stone-200 rounded-xl transition-colors"
           >
-            Cancel
+            取消
           </button>
           <button
             onClick={handleSave}
             className="px-5 py-2.5 bg-emerald-500 text-white font-medium hover:bg-emerald-600 rounded-xl shadow-sm transition-colors"
           >
-            Save Changes
+            保存更改
           </button>
         </div>
       </div>

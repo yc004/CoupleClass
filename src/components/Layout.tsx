@@ -3,24 +3,70 @@ import { Calendar, Users, Settings as SettingsIcon, Menu, X } from 'lucide-react
 import { useState, useEffect } from 'react';
 import SettingsModal from './SettingsModal';
 import { cn } from '../lib/utils';
+import { useStore } from '../store';
 
 export default function Layout() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const { mySchedule, myShareCode, partnerCode, setPartnerCode, setPartnerSchedule } = useStore();
 
+  // Handle partner code from URL
   useEffect(() => {
     const partner = searchParams.get('partner');
-    if (partner && window.location.pathname === '/') {
-      navigate(`/couple?partner=${partner}`, { replace: true });
+    if (partner) {
+      setPartnerCode(partner);
+      setSearchParams({});
+      if (window.location.pathname === '/') {
+        navigate('/couple', { replace: true });
+      }
     }
-  }, [searchParams, navigate]);
+  }, [searchParams, navigate, setPartnerCode, setSearchParams]);
 
+  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
+
+  // Push local changes to server for real-time sync
+  useEffect(() => {
+    if (myShareCode) {
+      fetch('/api/schedules', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: myShareCode, data: mySchedule })
+      }).catch(console.error);
+    }
+  }, [mySchedule, myShareCode]);
+
+  // WebSocket for real-time updates from partner
+  useEffect(() => {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const ws = new WebSocket(`${protocol}//${window.location.host}`);
+
+    ws.onopen = () => {
+      const ids = [];
+      if (myShareCode) ids.push(myShareCode);
+      if (partnerCode) ids.push(partnerCode);
+      if (ids.length > 0) {
+        ws.send(JSON.stringify({ type: 'subscribe', ids }));
+      }
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const msg = JSON.parse(event.data);
+        if (msg.type === 'update' && msg.id === partnerCode) {
+          setPartnerSchedule(msg.data);
+        }
+      } catch (e) {}
+    };
+
+    return () => ws.close();
+  }, [myShareCode, partnerCode, setPartnerSchedule]);
 
   return (
     <div className="h-screen h-[100dvh] bg-stone-50 text-stone-900 font-sans flex flex-col md:flex-row overflow-hidden">
@@ -30,7 +76,7 @@ export default function Layout() {
           <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-xl">
             S
           </div>
-          <h1 className="text-xl font-semibold tracking-tight">SyncEdu</h1>
+          <h1 className="text-xl font-semibold tracking-tight">同步课表</h1>
         </div>
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -57,7 +103,7 @@ export default function Layout() {
           <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-xl">
             S
           </div>
-          <h1 className="text-xl font-semibold tracking-tight">SyncEdu</h1>
+          <h1 className="text-xl font-semibold tracking-tight">同步课表</h1>
         </div>
 
         <nav className="flex-1 flex flex-col gap-1 mt-14 md:mt-0">
@@ -73,7 +119,7 @@ export default function Layout() {
             }
           >
             <Calendar className="w-5 h-5" />
-            My Schedule
+            我的课表
           </NavLink>
           <NavLink
             to="/couple"
@@ -87,7 +133,7 @@ export default function Layout() {
             }
           >
             <Users className="w-5 h-5" />
-            Couple Mode
+            情侣课表
           </NavLink>
         </nav>
 
@@ -99,7 +145,7 @@ export default function Layout() {
           className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-stone-600 hover:bg-stone-100 transition-colors mt-auto"
         >
           <SettingsIcon className="w-5 h-5" />
-          Settings
+          设置
         </button>
       </aside>
 

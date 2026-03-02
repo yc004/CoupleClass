@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { useStore } from '../store';
 import ScheduleGrid from '../components/ScheduleGrid';
 import { Share2, Link as LinkIcon, AlertCircle, Loader2, Users } from 'lucide-react';
 
 export default function CouplePage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const partnerCode = searchParams.get('partner');
-  
-  const { mySchedule, partnerSchedule, setPartnerSchedule, myShareCode, setMyShareCode } = useStore();
+  const { mySchedule, partnerSchedule, setPartnerSchedule, myShareCode, setMyShareCode, partnerCode, setPartnerCode } = useStore();
   
   const [inputCode, setInputCode] = useState(partnerCode || '');
   const [isLoading, setIsLoading] = useState(false);
@@ -42,13 +38,14 @@ export default function CouplePage() {
     setError('');
     try {
       const res = await fetch(`/api/schedules/${code}`);
-      if (!res.ok) throw new Error('Schedule not found');
+      if (!res.ok) throw new Error('未找到课表');
       const { data } = await res.json();
       setPartnerSchedule(data);
-      setSearchParams({ partner: code });
+      setPartnerCode(code);
     } catch (err) {
-      setError('Could not load partner schedule. Check the code.');
+      setError('无法加载伴侣课表，请检查邀请码。');
       setPartnerSchedule(null);
+      setPartnerCode(null);
     } finally {
       setIsLoading(false);
     }
@@ -64,15 +61,15 @@ export default function CouplePage() {
     if (!myShareCode) return;
     const url = `${window.location.origin}/couple?partner=${myShareCode}`;
     navigator.clipboard.writeText(url);
-    alert('Link copied to clipboard!');
+    alert('链接已复制到剪贴板！');
   };
 
   return (
     <div className="h-full p-2 md:p-8 flex flex-col gap-3 md:gap-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4 px-1 md:px-0 shrink-0">
         <div>
-          <h1 className="text-lg md:text-2xl font-bold text-stone-800 tracking-tight">Couple Mode</h1>
-          <p className="hidden md:block text-stone-500 text-sm mt-1">Sync schedules and find common free time</p>
+          <h1 className="text-lg md:text-2xl font-bold text-stone-800 tracking-tight">情侣课表</h1>
+          <p className="hidden md:block text-stone-500 text-sm mt-1">绑定伴侣，实时同步课表并寻找共同空闲时间</p>
         </div>
         
         <div className="flex items-center gap-2 md:gap-3">
@@ -83,19 +80,18 @@ export default function CouplePage() {
               className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-emerald-500 text-white text-sm md:text-base font-medium rounded-xl hover:bg-emerald-600 transition-colors shadow-sm disabled:opacity-50"
             >
               {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Share2 className="w-4 h-4" />}
-              Share
+              分享我的课表
             </button>
           ) : (
             <div className="flex items-center gap-2 bg-white border border-stone-200 rounded-xl p-1 pr-3 shadow-sm">
               <button
                 onClick={copyLink}
                 className="p-1.5 bg-stone-100 text-stone-600 hover:bg-stone-200 rounded-lg transition-colors"
-                title="Copy Link"
+                title="复制链接"
               >
                 <LinkIcon className="w-4 h-4" />
               </button>
-              <span className="text-xs md:text-sm font-mono font-medium text-stone-600">Code: {myShareCode}</span>
-              <button onClick={handleShare} className="text-[10px] md:text-xs text-emerald-600 hover:underline ml-1 md:ml-2">Update</button>
+              <span className="text-xs md:text-sm font-mono font-medium text-stone-600">邀请码: {myShareCode}</span>
             </div>
           )}
         </div>
@@ -107,9 +103,9 @@ export default function CouplePage() {
             <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Users className="w-8 h-8" />
             </div>
-            <h2 className="text-xl font-semibold text-stone-800 mb-2">Connect with Partner</h2>
+            <h2 className="text-xl font-semibold text-stone-800 mb-2">连接伴侣课表</h2>
             <p className="text-stone-500 text-sm mb-6">
-              Enter your partner's share code or ask them to send you their link to view schedules together.
+              输入TA的邀请码，或让TA发送链接给你，即可实时同步你们的课表。
             </p>
             
             <div className="flex gap-2">
@@ -117,7 +113,7 @@ export default function CouplePage() {
                 type="text"
                 value={inputCode}
                 onChange={(e) => setInputCode(e.target.value.toUpperCase())}
-                placeholder="Enter 6-char code"
+                placeholder="输入6位邀请码"
                 className="flex-1 px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono uppercase text-center min-w-0"
                 maxLength={6}
               />
@@ -126,7 +122,7 @@ export default function CouplePage() {
                 disabled={isLoading || inputCode.length < 6}
                 className="px-4 md:px-6 py-2 bg-stone-800 text-white font-medium rounded-xl hover:bg-stone-700 transition-colors disabled:opacity-50 shrink-0"
               >
-                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Connect'}
+                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : '连接'}
               </button>
             </div>
             {error && (
@@ -143,29 +139,29 @@ export default function CouplePage() {
             <div className="flex flex-wrap items-center gap-2 md:gap-4">
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-stone-300" />
-                <span className="text-[10px] md:text-sm font-medium text-stone-600">My Classes</span>
+                <span className="text-[10px] md:text-sm font-medium text-stone-600">我的课程</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-stone-100 border border-stone-300" />
-                <span className="text-[10px] md:text-sm font-medium text-stone-600">Partner's</span>
+                <span className="text-[10px] md:text-sm font-medium text-stone-600">TA的课程</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-200" />
-                <span className="text-[10px] md:text-sm font-medium text-stone-600">Both Free</span>
+                <span className="text-[10px] md:text-sm font-medium text-stone-600">共同空闲</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-purple-300" />
-                <span className="text-[10px] md:text-sm font-medium text-stone-600">Together</span>
+                <span className="text-[10px] md:text-sm font-medium text-stone-600">一起上课</span>
               </div>
             </div>
             <button
               onClick={() => {
                 setPartnerSchedule(null);
-                setSearchParams({});
+                setPartnerCode(null);
               }}
               className="text-[10px] md:text-sm text-stone-500 hover:text-stone-800 transition-colors ml-auto"
             >
-              Disconnect
+              断开连接
             </button>
           </div>
           <div className="flex-1 min-h-0">

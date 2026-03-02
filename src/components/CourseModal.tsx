@@ -58,7 +58,6 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
 
     const courseData = formData as Omit<Course, 'id'>;
     
-    // Ensure end period is >= start period
     if (courseData.endPeriod < courseData.startPeriod) {
       courseData.endPeriod = courseData.startPeriod;
     }
@@ -83,7 +82,7 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-5 border-b border-stone-100">
           <h2 className="text-xl font-semibold text-stone-800">
-            {courseId ? 'Edit Course' : 'Add Course'}
+            {courseId ? '编辑课程' : '添加课程'}
           </h2>
           <button onClick={onClose} className="p-2 -mr-2 text-stone-400 hover:text-stone-600 rounded-full hover:bg-stone-100 transition-colors">
             <X className="w-5 h-5" />
@@ -92,55 +91,55 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           <div>
-            <label className="block font-medium text-stone-800 mb-1 text-sm">Course Name *</label>
+            <label className="block font-medium text-stone-800 mb-1 text-sm">课程名称 *</label>
             <input
               required
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
-              placeholder="e.g. Advanced Mathematics"
+              placeholder="例如：高等数学"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-medium text-stone-800 mb-1 text-sm">Location</label>
+              <label className="block font-medium text-stone-800 mb-1 text-sm">上课地点</label>
               <input
                 type="text"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 className="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
-                placeholder="e.g. Room 101"
+                placeholder="例如：教学楼101"
               />
             </div>
             <div>
-              <label className="block font-medium text-stone-800 mb-1 text-sm">Teacher</label>
+              <label className="block font-medium text-stone-800 mb-1 text-sm">授课教师</label>
               <input
                 type="text"
                 value={formData.teacher}
                 onChange={(e) => setFormData({ ...formData, teacher: e.target.value })}
                 className="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
-                placeholder="e.g. Dr. Smith"
+                placeholder="例如：张老师"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block font-medium text-stone-800 mb-1 text-sm">Day</label>
+              <label className="block font-medium text-stone-800 mb-1 text-sm">星期</label>
               <select
                 value={formData.dayOfWeek}
                 onChange={(e) => setFormData({ ...formData, dayOfWeek: parseInt(e.target.value) })}
                 className="w-full px-4 py-2 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
               >
-                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => (
+                {['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map((day, i) => (
                   <option key={i} value={i + 1}>{day}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block font-medium text-stone-800 mb-1 text-sm">Start Period</label>
+              <label className="block font-medium text-stone-800 mb-1 text-sm">开始节次</label>
               <select
                 value={formData.startPeriod}
                 onChange={(e) => setFormData({ ...formData, startPeriod: parseInt(e.target.value) })}
@@ -152,7 +151,7 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
               </select>
             </div>
             <div>
-              <label className="block font-medium text-stone-800 mb-1 text-sm">End Period</label>
+              <label className="block font-medium text-stone-800 mb-1 text-sm">结束节次</label>
               <select
                 value={formData.endPeriod}
                 onChange={(e) => setFormData({ ...formData, endPeriod: parseInt(e.target.value) })}
@@ -166,7 +165,7 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
           </div>
 
           <div>
-            <label className="block font-medium text-stone-800 mb-2 text-sm">Color</label>
+            <label className="block font-medium text-stone-800 mb-2 text-sm">颜色</label>
             <div className="flex flex-wrap gap-2">
               {COLORS.map((color) => (
                 <button
@@ -175,7 +174,7 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
                   onClick={() => setFormData({ ...formData, color })}
                   className={cn(
                     "w-8 h-8 rounded-full border-2 transition-transform",
-                    color.split(' ')[0], // Get bg color
+                    color.split(' ')[0],
                     formData.color === color ? "scale-110 border-stone-800 shadow-sm" : "border-transparent hover:scale-105"
                   )}
                 />
@@ -184,34 +183,34 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
           </div>
 
           <div className="pt-4 flex justify-between items-center border-t border-stone-100">
-            {courseId ? (
-              <button
-                type="button"
-                onClick={handleDelete}
-                className="flex items-center gap-2 px-4 py-2 text-rose-600 hover:bg-rose-50 rounded-xl transition-colors text-sm font-medium"
-              >
-                <Trash2 className="w-4 h-4" />
-                Delete
-              </button>
-            ) : (
-              <div />
-            )}
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-5 py-2.5 text-stone-600 font-medium hover:bg-stone-100 rounded-xl transition-colors text-sm"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-5 py-2.5 bg-emerald-500 text-white font-medium hover:bg-emerald-600 rounded-xl shadow-sm transition-colors text-sm"
-              >
-                Save
-              </button>
+              {courseId ? (
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="flex items-center gap-2 px-4 py-2 text-rose-600 hover:bg-rose-50 rounded-xl transition-colors text-sm font-medium"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  删除
+                </button>
+              ) : (
+                <div />
+              )}
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-5 py-2.5 text-stone-600 font-medium hover:bg-stone-100 rounded-xl transition-colors text-sm"
+                >
+                  取消
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2.5 bg-emerald-500 text-white font-medium hover:bg-emerald-600 rounded-xl shadow-sm transition-colors text-sm"
+                >
+                  保存
+                </button>
+              </div>
             </div>
-          </div>
         </form>
       </div>
     </div>
