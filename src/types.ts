@@ -15,6 +15,7 @@ export type Settings = {
   classDuration: number; // minutes
   breakDuration: number; // minutes
   startTime: string; // "08:00"
+  periodTimes?: string[]; // Custom start times for each period
 };
 
 export type ScheduleData = {

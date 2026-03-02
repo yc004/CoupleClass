@@ -27,6 +27,9 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
   const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
   const getPeriodTime = (period: number) => {
+    if (settings.periodTimes && settings.periodTimes[period - 1]) {
+      return settings.periodTimes[period - 1];
+    }
     const [hours, minutes] = settings.startTime.split(':').map(Number);
     const totalMinutes = hours * 60 + minutes + (period - 1) * (settings.classDuration + settings.breakDuration);
     const h = Math.floor(totalMinutes / 60) % 24;
@@ -114,36 +117,41 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
             })
           ) : (
             // Couple Mode Rendering
-            Array.from({ length: days }).map((_, c) => {
-              return Array.from({ length: settings.totalPeriods }).map((_, r) => {
-                const day = c + 1;
-                const period = r + 1;
-                const myCourse = courses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
-                const partnerCourse = partnerCourses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
+            <>
+              {/* Background Free Cells */}
+              {Array.from({ length: days }).map((_, c) => {
+                return Array.from({ length: settings.totalPeriods }).map((_, r) => {
+                  const day = c + 1;
+                  const period = r + 1;
+                  const myCourse = courses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
+                  const partnerCourse = partnerCourses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
 
-                if (!myCourse && !partnerCourse) {
-                  return (
-                    <div 
-                      key={`couple-free-${day}-${period}`}
-                      className="m-1 rounded-xl bg-emerald-50/50 border border-emerald-100/50 flex items-center justify-center pointer-events-none z-0"
-                      style={{ gridColumn: day + 1, gridRow: period }}
-                    >
-                      <span className="text-[10px] font-medium text-emerald-600/40 uppercase tracking-wider">共同空闲</span>
-                    </div>
-                  );
-                }
+                  if (!myCourse && !partnerCourse) {
+                    return (
+                      <div 
+                        key={`couple-free-${day}-${period}`}
+                        className="m-1 rounded-xl bg-emerald-50/50 border border-emerald-100/50 flex items-center justify-center pointer-events-none z-0"
+                        style={{ gridColumn: day + 1, gridRow: period }}
+                      >
+                        <span className="text-[10px] font-medium text-emerald-600/40 uppercase tracking-wider">共同空闲</span>
+                      </div>
+                    );
+                  }
+                  return null;
+                });
+              })}
 
-                const isSameClass = myCourse && partnerCourse && myCourse.name === partnerCourse.name;
-
-                if (isSameClass && myCourse) {
-                  // Only render on start period to avoid duplicates if it spans
-                  if (period !== myCourse.startPeriod) return null;
+              {/* Together Courses */}
+              {courses.map(myCourse => {
+                if (myCourse.dayOfWeek > days) return null;
+                const partnerCourse = partnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
+                if (partnerCourse) {
                   const span = myCourse.endPeriod - myCourse.startPeriod + 1;
                   return (
                     <div
-                      key={`couple-together-${day}-${period}`}
+                      key={`together-${myCourse.id}`}
                       className="m-1 p-2 rounded-xl bg-purple-100 border border-purple-200 flex flex-col justify-center items-center text-center z-10 shadow-sm"
-                      style={{ gridColumn: day + 1, gridRow: `${period} / span ${span}` }}
+                      style={{ gridColumn: myCourse.dayOfWeek + 1, gridRow: `${myCourse.startPeriod} / span ${span}` }}
                     >
                       <span className="text-xs font-bold text-purple-800 mb-1">一起上课！✨</span>
                       <span className="text-xs font-semibold text-purple-700 line-clamp-2">{myCourse.name}</span>
@@ -151,29 +159,60 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                     </div>
                   );
                 }
+                return null;
+              })}
 
+              {/* My Courses (Not Together) */}
+              {courses.map(myCourse => {
+                if (myCourse.dayOfWeek > days) return null;
+                const partnerCourse = partnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
+                if (partnerCourse) return null;
+
+                const span = myCourse.endPeriod - myCourse.startPeriod + 1;
                 return (
-                  <div 
-                    key={`couple-split-${day}-${period}`}
-                    className="m-1 flex flex-col gap-1 z-10"
-                    style={{ gridColumn: day + 1, gridRow: period }}
+                  <div
+                    key={`my-${myCourse.id}`}
+                    className={cn(
+                      "m-1 p-1.5 rounded-lg border shadow-sm flex flex-col gap-0.5 overflow-hidden z-10",
+                      myCourse.color || COLORS[0]
+                    )}
+                    style={{ 
+                      gridColumn: myCourse.dayOfWeek + 1, 
+                      gridRow: `${myCourse.startPeriod} / span ${span}`,
+                      justifySelf: 'start',
+                      width: 'calc(50% - 4px)'
+                    }}
                   >
-                    {myCourse && period === myCourse.startPeriod && (
-                      <div className={cn("flex-1 rounded-lg p-1.5 text-[10px] border leading-tight shadow-sm", myCourse.color || COLORS[0])}>
-                        <div className="font-bold truncate">我: {myCourse.name}</div>
-                        <div className="opacity-80 truncate">{myCourse.location}</div>
-                      </div>
-                    )}
-                    {partnerCourse && period === partnerCourse.startPeriod && (
-                      <div className="flex-1 rounded-lg p-1.5 text-[10px] border bg-stone-100 text-stone-700 border-stone-200 leading-tight shadow-sm">
-                        <div className="font-bold truncate">TA: {partnerCourse.name}</div>
-                        <div className="opacity-80 truncate">{partnerCourse.location}</div>
-                      </div>
-                    )}
+                    <div className="font-bold text-[10px] leading-tight truncate">我: {myCourse.name}</div>
+                    <div className="text-[10px] opacity-80 truncate">{myCourse.location}</div>
                   </div>
                 );
-              });
-            })
+              })}
+
+              {/* Partner Courses (Not Together) */}
+              {partnerCourses.map(partnerCourse => {
+                if (partnerCourse.dayOfWeek > days) return null;
+                const myCourse = courses.find(c => c.dayOfWeek === partnerCourse.dayOfWeek && c.startPeriod === partnerCourse.startPeriod && c.endPeriod === partnerCourse.endPeriod && c.name === partnerCourse.name);
+                if (myCourse) return null;
+
+                const span = partnerCourse.endPeriod - partnerCourse.startPeriod + 1;
+                return (
+                  <div
+                    key={`partner-${partnerCourse.id}`}
+                    className="m-1 p-1.5 rounded-lg border bg-stone-100 text-stone-700 border-stone-200 shadow-sm flex flex-col gap-0.5 overflow-hidden z-10"
+                    style={{ 
+                      gridColumn: partnerCourse.dayOfWeek + 1, 
+                      gridRow: `${partnerCourse.startPeriod} / span ${span}`,
+                      justifySelf: 'end',
+                      width: 'calc(50% - 4px)'
+                    }}
+                  >
+                    <div className="font-bold text-[10px] leading-tight truncate">TA: {partnerCourse.name}</div>
+                    <div className="text-[10px] opacity-80 truncate">{partnerCourse.location}</div>
+                  </div>
+                );
+              })}
+            </>
           )}
         </div>
       </div>

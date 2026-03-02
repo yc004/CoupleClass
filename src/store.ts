@@ -25,6 +25,7 @@ const defaultSettings: Settings = {
   classDuration: 45,
   breakDuration: 10,
   startTime: '08:00',
+  periodTimes: [],
 };
 
 export const useStore = create<AppState>()(
