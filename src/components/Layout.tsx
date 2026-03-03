@@ -65,43 +65,35 @@ export default function Layout() {
   const isCoupleMode = location.pathname === '/couple';
 
   return (
-    <div className="h-screen h-[100dvh] text-stone-900 font-sans flex flex-col overflow-hidden relative">
-      {/* Header */}
-      <header className="glass-header px-4 py-3 flex items-center justify-between z-20 shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-emerald-500/90 flex items-center justify-center text-white font-bold text-xl shadow-sm">
-            S
-          </div>
-          <h1 className="text-xl font-semibold tracking-tight">同步课表</h1>
-        </div>
-        <button 
-          onClick={() => setIsSettingsOpen(true)}
-          className="p-2 text-stone-600 hover:bg-stone-200/50 rounded-xl transition-colors"
-          title="设置"
-        >
-          <SettingsIcon className="w-6 h-6" />
-        </button>
-      </header>
-
-      {/* Main Content */}
+    <div className="h-screen h-[100dvh] font-sans flex flex-col overflow-hidden relative bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100">
+      {/* 全屏课表内容 */}
       <main className="flex-1 overflow-hidden flex flex-col relative">
         <Outlet />
       </main>
 
-      {/* Floating Action Button for Mode Switch */}
+      {/* 浮动设置按钮 */}
+      <button 
+        onClick={() => setIsSettingsOpen(true)}
+        className="flat-button absolute top-4 right-4 z-30 p-3 rounded-xl shadow-sm hover:shadow-md transition-all"
+        title="设置"
+      >
+        <SettingsIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+      </button>
+
+      {/* 浮动模式切换按钮 */}
       <button
         onClick={() => navigate(isCoupleMode ? '/' : '/couple')}
-        className="absolute bottom-6 right-6 z-30 flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-500/90 backdrop-blur-md text-white rounded-full shadow-lg border border-white/20 hover:bg-emerald-600/90 hover:scale-105 active:scale-95 transition-all"
+        className="absolute bottom-6 right-6 z-30 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 bg-blue-500 hover:bg-blue-600 text-white"
       >
         {isCoupleMode ? (
           <>
             <Calendar className="w-5 h-5" />
-            <span className="font-medium">我的课表</span>
+            <span className="font-semibold">我的课表</span>
           </>
         ) : (
           <>
             <Users className="w-5 h-5" />
-            <span className="font-medium">情侣课表</span>
+            <span className="font-semibold">情侣课表</span>
           </>
         )}
       </button>

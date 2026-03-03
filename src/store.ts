@@ -26,6 +26,9 @@ const defaultSettings: Settings = {
   breakDuration: 10,
   startTime: '08:00',
   periodTimes: [],
+  semesterStartDate: new Date().toISOString().split('T')[0],
+  totalWeeks: 20,
+  showNonCurrentWeekCourses: false,
 };
 
 export const useStore = create<AppState>()(

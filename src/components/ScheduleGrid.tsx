@@ -8,6 +8,7 @@ interface ScheduleGridProps {
   mode: 'single' | 'couple';
   onAddCourse?: (day: number, period: number) => void;
   onEditCourse?: (course: Course) => void;
+  currentWeek?: number | null; // 当前教学周
 }
 
 const COLORS = [
@@ -21,10 +22,51 @@ const COLORS = [
   'bg-cyan-100 text-cyan-800 border-cyan-200',
 ];
 
-export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAddCourse, onEditCourse }: ScheduleGridProps) {
+export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAddCourse, onEditCourse, currentWeek }: ScheduleGridProps) {
   const { mySchedule: { settings } } = useStore();
   const days = settings.showWeekends ? 7 : 5;
   const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+  // 判断课程是否在本周上课
+  const isCourseInCurrentWeek = (course: Course): boolean => {
+    if (!currentWeek || !course.weekType || course.weekType === 'all') {
+      return true;
+    }
+
+    if (course.weekType === 'odd') {
+      return currentWeek % 2 === 1;
+    }
+
+    if (course.weekType === 'even') {
+      return currentWeek % 2 === 0;
+    }
+
+    if (course.weekType === 'custom' && course.customWeeks) {
+      return course.customWeeks.includes(currentWeek);
+    }
+
+    return true;
+  };
+
+  // 根据设置过滤或标记课程
+  const processedCourses = courses.map(course => ({
+    ...course,
+    isCurrentWeek: isCourseInCurrentWeek(course)
+  }));
+
+  const processedPartnerCourses = partnerCourses.map(course => ({
+    ...course,
+    isCurrentWeek: isCourseInCurrentWeek(course)
+  }));
+
+  // 如果不显示非本周课程，则过滤掉
+  const filteredCourses = settings.showNonCurrentWeekCourses 
+    ? processedCourses 
+    : processedCourses.filter(c => c.isCurrentWeek);
+  
+  const filteredPartnerCourses = settings.showNonCurrentWeekCourses 
+    ? processedPartnerCourses 
+    : processedPartnerCourses.filter(c => c.isCurrentWeek);
 
   const getPeriodTime = (period: number) => {
     if (settings.periodTimes && settings.periodTimes[period - 1]) {
@@ -37,15 +79,36 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
   };
 
+  const getPeriodTimeRange = (period: number) => {
+    const startTime = getPeriodTime(period);
+    
+    // 计算结束时间
+    let endMinutes: number;
+    if (settings.periodTimes && settings.periodTimes[period - 1]) {
+      const [h, m] = startTime.split(':').map(Number);
+      endMinutes = h * 60 + m + settings.classDuration;
+    } else {
+      const [hours, minutes] = settings.startTime.split(':').map(Number);
+      const totalMinutes = hours * 60 + minutes + (period - 1) * (settings.classDuration + settings.breakDuration);
+      endMinutes = totalMinutes + settings.classDuration;
+    }
+    
+    const endH = Math.floor(endMinutes / 60) % 24;
+    const endM = endMinutes % 60;
+    const endTime = `${endH.toString().padStart(2, '0')}:${endM.toString().padStart(2, '0')}`;
+    
+    return { startTime, endTime };
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden flex flex-col h-full">
+    <div className="h-full w-full flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="grid border-b border-stone-200 bg-stone-50/80" style={{ gridTemplateColumns: `60px repeat(${days}, minmax(0, 1fr))` }}>
-        <div className="p-3 text-center text-xs font-medium text-stone-400 uppercase tracking-wider border-r border-stone-200">
-          时间
+      <div className="grid border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-slate-800 shrink-0" style={{ gridTemplateColumns: `45px repeat(${days}, minmax(0, 1fr))` }}>
+        <div className="p-2 text-center text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-r border-gray-200 dark:border-gray-700">
+          节次
         </div>
         {Array.from({ length: days }).map((_, i) => (
-          <div key={i} className="p-3 text-center text-sm font-semibold text-stone-700 border-r border-stone-200 last:border-r-0">
+          <div key={i} className="p-3 text-center text-sm font-bold text-gray-900 dark:text-gray-100 border-r border-gray-200 dark:border-gray-700 last:border-r-0">
             {dayNames[i]}
           </div>
         ))}
@@ -56,61 +119,78 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
         <div 
           className="grid" 
           style={{ 
-            gridTemplateColumns: `60px repeat(${days}, minmax(0, 1fr))`,
+            gridTemplateColumns: `45px repeat(${days}, minmax(0, 1fr))`,
             gridTemplateRows: `repeat(${settings.totalPeriods}, minmax(80px, auto))`
           }}
         >
           {/* Background Grid Lines & Time Column */}
-          {Array.from({ length: settings.totalPeriods }).map((_, r) => (
-            <div key={`row-${r}`} className="contents">
-              <div className="border-b border-r border-stone-200 bg-stone-50/30 flex flex-col items-center justify-center p-1" style={{ gridColumn: 1, gridRow: r + 1 }}>
-                <span className="text-xs font-bold text-stone-700">{r + 1}</span>
-                <span className="text-[10px] text-stone-400">{getPeriodTime(r + 1)}</span>
-              </div>
-              {Array.from({ length: days }).map((_, c) => (
-                <div 
-                  key={`cell-${r}-${c}`} 
-                  className="border-b border-r border-stone-100 hover:bg-stone-50/50 cursor-pointer transition-colors group relative"
-                  style={{ gridColumn: c + 2, gridRow: r + 1 }}
-                  onClick={() => mode === 'single' && onAddCourse?.(c + 1, r + 1)}
-                >
-                  {mode === 'single' && (
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-8 h-8 rounded-full bg-stone-200/50 flex items-center justify-center text-stone-500">
-                        +
-                      </div>
-                    </div>
-                  )}
+          {Array.from({ length: settings.totalPeriods }).map((_, r) => {
+            const { startTime, endTime } = getPeriodTimeRange(r + 1);
+            return (
+              <div key={`row-${r}`} className="contents">
+                <div className="border-b border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-slate-800 flex flex-col items-center justify-center py-1 px-0.5" style={{ gridColumn: 1, gridRow: r + 1 }}>
+                  <span className="text-xs font-bold text-gray-900 dark:text-gray-100 mb-1">{r + 1}</span>
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="text-[9px] text-gray-500 dark:text-gray-400 leading-none">{startTime}</span>
+                    <span className="text-[9px] text-gray-500 dark:text-gray-400 leading-none">{endTime}</span>
+                  </div>
                 </div>
-              ))}
-            </div>
-          ))}
+                {Array.from({ length: days }).map((_, c) => (
+                  <div 
+                    key={`cell-${r}-${c}`} 
+                    className="border-b border-r border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-slate-800 cursor-pointer transition-all duration-200 group relative"
+                    style={{ gridColumn: c + 2, gridRow: r + 1 }}
+                    onClick={() => mode === 'single' && onAddCourse?.(c + 1, r + 1)}
+                  >
+                    {mode === 'single' && (
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+                          +
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          })}
 
           {/* Courses (Absolute/Grid Placed) */}
           {mode === 'single' ? (
-            courses.map(course => {
+            filteredCourses.map(course => {
               if (course.dayOfWeek > days) return null;
               const span = course.endPeriod - course.startPeriod + 1;
               return (
                 <div
                   key={course.id}
-                  className={cn(
-                    "m-1 p-2 rounded-xl border shadow-sm cursor-pointer transition-transform hover:scale-[1.02] flex flex-col gap-1 overflow-hidden z-10",
-                    course.color || COLORS[0]
-                  )}
+                  className="m-1.5 p-3 rounded-xl cursor-pointer transition-all duration-300 hover:scale-[1.03] flex flex-col gap-1 overflow-hidden z-10 shadow-sm hover:shadow-md relative border"
                   style={{ 
                     gridColumn: course.dayOfWeek + 1, 
-                    gridRow: `${course.startPeriod} / span ${span}` 
+                    gridRow: `${course.startPeriod} / span ${span}`,
+                    background: course.isCurrentWeek ? '#ffffff' : '#f3f4f6',
+                    borderColor: course.isCurrentWeek ? '#e5e7eb' : '#d1d5db',
+                    opacity: course.isCurrentWeek ? 1 : 0.6
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
                     onEditCourse?.(course);
                   }}
                 >
-                  <div className="font-semibold text-sm leading-tight line-clamp-2">{course.name}</div>
-                  <div className="text-xs opacity-80 mt-auto flex flex-col gap-0.5">
-                    <span className="truncate">📍 {course.location}</span>
-                    <span className="truncate">👨‍🏫 {course.teacher}</span>
+                  {!course.isCurrentWeek && (
+                    <div className="absolute top-1 right-1 text-[9px] px-1.5 py-0.5 rounded bg-gray-400 text-white">
+                      非本周
+                    </div>
+                  )}
+                  <div className={cn(
+                    "font-bold text-sm leading-tight break-words",
+                    course.isCurrentWeek ? "text-gray-900" : "text-gray-500"
+                  )}>{course.name}</div>
+                  <div className={cn(
+                    "text-xs mt-auto flex flex-col gap-0.5",
+                    course.isCurrentWeek ? "text-gray-600" : "text-gray-400"
+                  )}>
+                    <span className="break-words">{course.location}</span>
+                    <span className="break-words">{course.teacher}</span>
                   </div>
                 </div>
               );
@@ -123,17 +203,20 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                 return Array.from({ length: settings.totalPeriods }).map((_, r) => {
                   const day = c + 1;
                   const period = r + 1;
-                  const myCourse = courses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
-                  const partnerCourse = partnerCourses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
+                  const myCourse = filteredCourses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
+                  const partnerCourse = filteredPartnerCourses.find(course => course.dayOfWeek === day && period >= course.startPeriod && period <= course.endPeriod);
 
                   if (!myCourse && !partnerCourse) {
                     return (
                       <div 
                         key={`couple-free-${day}-${period}`}
-                        className="m-1 rounded-xl bg-emerald-50/50 border border-emerald-100/50 flex items-center justify-center pointer-events-none z-0"
-                        style={{ gridColumn: day + 1, gridRow: period }}
+                        className="m-1.5 rounded-xl flex items-center justify-center pointer-events-none z-0 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800"
+                        style={{ 
+                          gridColumn: day + 1, 
+                          gridRow: period
+                        }}
                       >
-                        <span className="text-[10px] font-medium text-emerald-600/40 uppercase tracking-wider">共同空闲</span>
+                        <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">共同空闲</span>
                       </div>
                     );
                   }
@@ -142,20 +225,43 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
               })}
 
               {/* Together Courses */}
-              {courses.map(myCourse => {
+              {filteredCourses.map(myCourse => {
                 if (myCourse.dayOfWeek > days) return null;
-                const partnerCourse = partnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
+                const partnerCourse = filteredPartnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
                 if (partnerCourse) {
                   const span = myCourse.endPeriod - myCourse.startPeriod + 1;
                   return (
                     <div
                       key={`together-${myCourse.id}`}
-                      className="m-1 p-2 rounded-xl bg-purple-100 border border-purple-200 flex flex-col justify-center items-center text-center z-10 shadow-sm"
-                      style={{ gridColumn: myCourse.dayOfWeek + 1, gridRow: `${myCourse.startPeriod} / span ${span}` }}
+                      className={cn(
+                        "m-1.5 p-3 rounded-xl flex flex-col justify-center items-center text-center z-10 shadow-sm relative border",
+                        myCourse.isCurrentWeek 
+                          ? "bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800" 
+                          : "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700"
+                      )}
+                      style={{ 
+                        gridColumn: myCourse.dayOfWeek + 1, 
+                        gridRow: `${myCourse.startPeriod} / span ${span}`,
+                        opacity: myCourse.isCurrentWeek ? 1 : 0.6
+                      }}
                     >
-                      <span className="text-xs font-bold text-purple-800 mb-1">一起上课！✨</span>
-                      <span className="text-xs font-semibold text-purple-700 line-clamp-2">{myCourse.name}</span>
-                      <span className="text-[10px] text-purple-600 mt-1">📍 {myCourse.location}</span>
+                      {!myCourse.isCurrentWeek && (
+                        <div className="absolute top-1 right-1 text-[9px] px-1.5 py-0.5 rounded bg-gray-400 dark:bg-gray-600 text-white">
+                          非本周
+                        </div>
+                      )}
+                      <span className={cn(
+                        "text-xs font-bold mb-1",
+                        myCourse.isCurrentWeek ? "text-purple-600 dark:text-purple-400" : "text-gray-500 dark:text-gray-400"
+                      )}>一起上课 ✨</span>
+                      <span className={cn(
+                        "text-xs font-bold break-words",
+                        myCourse.isCurrentWeek ? "text-gray-900 dark:text-gray-100" : "text-gray-600 dark:text-gray-400"
+                      )}>{myCourse.name}</span>
+                      <span className={cn(
+                        "text-[10px] mt-1 break-words",
+                        myCourse.isCurrentWeek ? "text-gray-600 dark:text-gray-400" : "text-gray-500 dark:text-gray-500"
+                      )}>{myCourse.location}</span>
                     </div>
                   );
                 }
@@ -163,9 +269,9 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
               })}
 
               {/* My Courses (Not Together) */}
-              {courses.map(myCourse => {
+              {filteredCourses.map(myCourse => {
                 if (myCourse.dayOfWeek > days) return null;
-                const partnerCourse = partnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
+                const partnerCourse = filteredPartnerCourses.find(c => c.dayOfWeek === myCourse.dayOfWeek && c.startPeriod === myCourse.startPeriod && c.endPeriod === myCourse.endPeriod && c.name === myCourse.name);
                 if (partnerCourse) return null;
 
                 const span = myCourse.endPeriod - myCourse.startPeriod + 1;
@@ -173,42 +279,73 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                   <div
                     key={`my-${myCourse.id}`}
                     className={cn(
-                      "m-1 p-1.5 rounded-lg border shadow-sm flex flex-col gap-0.5 overflow-hidden z-10",
-                      myCourse.color || COLORS[0]
+                      "m-1 p-2 rounded-xl shadow-sm flex flex-col gap-0.5 overflow-hidden z-10 relative border",
+                      myCourse.isCurrentWeek 
+                        ? "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800" 
+                        : "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700"
                     )}
                     style={{ 
                       gridColumn: myCourse.dayOfWeek + 1, 
                       gridRow: `${myCourse.startPeriod} / span ${span}`,
                       justifySelf: 'start',
-                      width: 'calc(50% - 4px)'
+                      width: 'calc(50% - 6px)',
+                      opacity: myCourse.isCurrentWeek ? 1 : 0.6
                     }}
                   >
-                    <div className="font-bold text-[10px] leading-tight truncate">我: {myCourse.name}</div>
-                    <div className="text-[10px] opacity-80 truncate">{myCourse.location}</div>
+                    {!myCourse.isCurrentWeek && (
+                      <div className="absolute top-0.5 right-0.5 text-[8px] px-1 py-0.5 rounded bg-gray-400 dark:bg-gray-600 text-white">
+                        非本周
+                      </div>
+                    )}
+                    <div className={cn(
+                      "font-bold text-[10px] leading-tight break-words",
+                      myCourse.isCurrentWeek ? "text-blue-600 dark:text-blue-400" : "text-gray-600 dark:text-gray-400"
+                    )}>我: {myCourse.name}</div>
+                    <div className={cn(
+                      "text-[10px] break-words",
+                      myCourse.isCurrentWeek ? "text-gray-600 dark:text-gray-400" : "text-gray-500 dark:text-gray-500"
+                    )}>{myCourse.location}</div>
                   </div>
                 );
               })}
 
               {/* Partner Courses (Not Together) */}
-              {partnerCourses.map(partnerCourse => {
+              {filteredPartnerCourses.map(partnerCourse => {
                 if (partnerCourse.dayOfWeek > days) return null;
-                const myCourse = courses.find(c => c.dayOfWeek === partnerCourse.dayOfWeek && c.startPeriod === partnerCourse.startPeriod && c.endPeriod === partnerCourse.endPeriod && c.name === partnerCourse.name);
+                const myCourse = filteredCourses.find(c => c.dayOfWeek === partnerCourse.dayOfWeek && c.startPeriod === partnerCourse.startPeriod && c.endPeriod === partnerCourse.endPeriod && c.name === partnerCourse.name);
                 if (myCourse) return null;
 
                 const span = partnerCourse.endPeriod - partnerCourse.startPeriod + 1;
                 return (
                   <div
                     key={`partner-${partnerCourse.id}`}
-                    className="m-1 p-1.5 rounded-lg border bg-stone-100 text-stone-700 border-stone-200 shadow-sm flex flex-col gap-0.5 overflow-hidden z-10"
+                    className={cn(
+                      "m-1 p-2 rounded-xl shadow-sm flex flex-col gap-0.5 overflow-hidden z-10 relative border",
+                      partnerCourse.isCurrentWeek 
+                        ? "bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-800" 
+                        : "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700"
+                    )}
                     style={{ 
                       gridColumn: partnerCourse.dayOfWeek + 1, 
                       gridRow: `${partnerCourse.startPeriod} / span ${span}`,
                       justifySelf: 'end',
-                      width: 'calc(50% - 4px)'
+                      width: 'calc(50% - 6px)',
+                      opacity: partnerCourse.isCurrentWeek ? 1 : 0.6
                     }}
                   >
-                    <div className="font-bold text-[10px] leading-tight truncate">TA: {partnerCourse.name}</div>
-                    <div className="text-[10px] opacity-80 truncate">{partnerCourse.location}</div>
+                    {!partnerCourse.isCurrentWeek && (
+                      <div className="absolute top-0.5 right-0.5 text-[8px] px-1 py-0.5 rounded bg-gray-400 dark:bg-gray-600 text-white">
+                        非本周
+                      </div>
+                    )}
+                    <div className={cn(
+                      "font-bold text-[10px] leading-tight break-words",
+                      partnerCourse.isCurrentWeek ? "text-pink-600 dark:text-pink-400" : "text-gray-600 dark:text-gray-400"
+                    )}>TA: {partnerCourse.name}</div>
+                    <div className={cn(
+                      "text-[10px] break-words",
+                      partnerCourse.isCurrentWeek ? "text-gray-600 dark:text-gray-400" : "text-gray-500 dark:text-gray-500"
+                    )}>{partnerCourse.location}</div>
                   </div>
                 );
               })}

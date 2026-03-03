@@ -5,27 +5,107 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* 浅色模式 */
 body {
-  background-color: #f2f2f7;
-  background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,0.03) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.03) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.03) 0, transparent 50%);
-  background-attachment: fixed;
+  background: #ffffff;
+  color: #1f2937;
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0f172a;
+    color: #f1f5f9;
+  }
 }
 
-.glass-header {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+/* 扁平按钮 */
+.flat-button {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.2s ease;
+}
+
+.flat-button:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.flat-button:active {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flat-button {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+  }
+
+  .flat-button:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.35);
+  }
+
+  .flat-button:active {
+    background: rgba(59, 130, 246, 0.25);
+  }
+}
+
+/* 扁平输入框 */
+.flat-input {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.flat-input:focus {
+  background: #ffffff;
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flat-input {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+  }
+
+  .flat-input:focus {
+    background: #0f172a;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* 扁平卡片 */
+.flat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flat-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* 扁平模态框 */
+.flat-modal {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  .flat-modal {
+    background: #1e293b;
+    border: 1px solid #334155;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  }
 }
 
