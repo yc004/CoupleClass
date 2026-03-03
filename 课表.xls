@@ -1,0 +1,751 @@
+<html xmlns:x="urn:schemas-microsoft-com:office:excel">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" /> 
+<!--[if gte mso 9]><xml>  
+    <x:ExcelWorkbook>  
+        <x:ExcelWorksheets>  
+            <x:ExcelWorksheet>  
+                <x:Name>工作表标题</x:Name>  
+                <x:WorksheetOptions>  
+                    <x:Print>  
+                        <x:ValidPrinterInfo />  
+                    </x:Print>  
+                </x:WorksheetOptions>  
+            </x:ExcelWorksheet>  
+        </x:ExcelWorksheets>  
+    </x:ExcelWorkbook>  
+</xml>  
+<![endif]-->  
+</head>
+
+<body>
+
+<div id="ExportA" width="100%" align="center" cellpadding="0" cellspacing="0">
+    <h1 align="center">个人课程表</h1>
+    <h3 align="center">2025-2026学年第一学期</h3>
+   学号:1231003009&nbsp;&nbsp;&nbsp; 学生姓名:刘逸宸&nbsp;&nbsp;&nbsp;所属班级: xg23B3sf&nbsp;&nbsp;&nbsp;总学分:35
+   		<pre>课表格式说明：教师姓名 课程名称(序号) (第n周-第m周,教室)</pre>
+    <table width="100%" id="manualArrangeCourseTable" align="center" class="gridtable" style="text-align:center" border="1">
+        <thead>
+        <tr>
+            <th style="background-color:#DEEDF7;" height="10px" width="80px">节次/
+            周次
+                </th><th style="background-color:#DEEDF7;">
+                    <font size="2px">星期一</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期二</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期三</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期四</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期五</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期六</font>
+                </th>
+                <th style="background-color:#DEEDF7;">
+                    <font size="2px">星期日</font>
+                </th>
+        </tr>
+        </thead>
+            <tbody><tr>
+                <td style="background-color:rgb(238, 255, 0)">
+                    <font size="2px"> 1</font><br style='mso-data-placement:same-cell;'/>
+                    8:00- 8:40
+                </td>
+                    <td id="TD0_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD13_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="教学设计(3103222.01) (王怀波);;;(1-16,北二区 北二教学楼 228j（公共阶梯）)">教学设计(3103222.01) (王怀波)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 228j（公共阶梯）)</td>
+                    <td id="TD26_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="2" class="infoTitle" title="仿真建模与MATLAB(3107043.01) (潘巍);;;(1-16,北二区 北二教学楼 419)">仿真建模与MATLAB(3107043.01) (潘巍)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 419)</td>
+                    <td id="TD39_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD52_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="习近平新时代中国特色社会主义思想概论(3700032.07) (文学);;;(1-16,北二区 北二教学楼 108lt（公共礼堂）)">习近平新时代中国特色社会主义思想概论(3700032.07) (文学)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 108lt（公共礼堂）)</td>
+                    <td id="TD65_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD78_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 255, 0)">
+                    <font size="2px"> 2</font><br style='mso-data-placement:same-cell;'/>
+                    8:50- 9:30
+                </td>
+                    <td id="TD1_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    
+                    <td id="TD40_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    <td id="TD66_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD79_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 255, 0)">
+                    <font size="2px"> 3</font><br style='mso-data-placement:same-cell;'/>
+                    9:40- 10:20
+                </td>
+                    <td id="TD2_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="操作系统(3103079.01) (张倩颖);;;(1-16,北二区 北二教学楼 136j（公共阶梯）)">操作系统(3103079.01) (张倩颖)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 136j（公共阶梯）)</td>
+                    
+                    <td id="TD28_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="机器人控制(3103219.01) (刘京锐);;;(1-16,北二区 北二教学楼 330)">机器人控制(3103219.01) (刘京锐)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 330)</td>
+                    <td id="TD41_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="机器学习(3107088.01) (邵振洲);;;(1-16,北二区 北二教学楼 228j（公共阶梯）)">机器学习(3107088.01) (邵振洲)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 228j（公共阶梯）)</td>
+                    
+                    <td id="TD67_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD80_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 255, 0)">
+                    <font size="2px"> 4</font><br style='mso-data-placement:same-cell;'/>
+                    10:40- 11:20
+                </td>
+                    
+                    <td id="TD16_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="2" class="infoTitle" title="教育研究概论(3043043.04) (贾瑜,李欣蕾);;;(1-16,北二区 北二教学楼 322j（公共阶梯）)">教育研究概论(3043043.04) (贾瑜,李欣蕾)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 322j（公共阶梯）)</td>
+                    
+                    
+                    <td id="TD55_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD68_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD81_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 255, 0)">
+                    <font size="2px"> 5</font><br style='mso-data-placement:same-cell;'/>
+                    11:30- 12:10
+                </td>
+                    
+                    
+                    
+                    
+                    <td id="TD56_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD69_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD82_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 0, 0)">
+                    <font size="2px"> 6</font><br style='mso-data-placement:same-cell;'/>
+                    13:30- 14:10
+                </td>
+                    <td id="TD5_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="网络工程(3103091.01) (刘羽);(5-6 双8-12,北二区 北二教学楼 314);网络工程(3103091.01) (刘羽);(1-3 单7-11,北二区 北二教学楼 228j（公共阶梯）)">网络工程(3103091.01) (刘羽)<br style='mso-data-placement:same-cell;'/>(5-6 双8-12,北二区 北二教学楼 314)<br style='mso-data-placement:same-cell;'/>网络工程(3103091.01) (刘羽)<br style='mso-data-placement:same-cell;'/>(1-3 单7-11,北二区 北二教学楼 228j（公共阶梯）)</td>
+                    <td id="TD18_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD31_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD44_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD57_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="信息技术教育学科教学法(3100109.01) (孙众);(3-8 11-12 16,北二区 北二教学楼 228j（公共阶梯）);信息技术教育学科教学法(3100109.01) (孙众);(1-2,校本部 教四楼 301（公共教室）)">信息技术教育学科教学法(3100109.01) (孙众)<br style='mso-data-placement:same-cell;'/>(3-8 11-12 16,北二区 北二教学楼 228j（公共阶梯）)<br style='mso-data-placement:same-cell;'/>信息技术教育学科教学法(3100109.01) (孙众)<br style='mso-data-placement:same-cell;'/>(1-2,校本部 教四楼 301（公共教室）)</td>
+                    <td id="TD70_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD83_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 0, 0)">
+                    <font size="2px"> 7</font><br style='mso-data-placement:same-cell;'/>
+                    14:20- 15:00
+                </td>
+                    
+                    <td id="TD19_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD32_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD45_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    <td id="TD71_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD84_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 0, 0)">
+                    <font size="2px"> 8</font><br style='mso-data-placement:same-cell;'/>
+                    15:10- 15:50
+                </td>
+                    
+                    <td id="TD20_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD33_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD46_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    <td id="TD72_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD85_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 0, 0)">
+                    <font size="2px"> 9</font><br style='mso-data-placement:same-cell;'/>
+                    16:00- 16:40
+                </td>
+                    <td id="TD8_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="2" class="infoTitle" title="网络工程(3103091.01) (刘羽);;;(5-6 双8-12,北二区 北二教学楼 314)">网络工程(3103091.01) (刘羽)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(5-6 双8-12,北二区 北二教学楼 314)</td>
+                    <td id="TD21_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD34_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="2" class="infoTitle" title="机器学习实验(3109148.01) (杨镒箫);;;(7-12,北二区 北二教学楼 313)">机器学习实验(3109148.01) (杨镒箫)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(7-12,北二区 北二教学楼 313)</td>
+                    <td id="TD47_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD60_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD73_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD86_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(238, 0, 0)">
+                    <font size="2px"> 10</font><br style='mso-data-placement:same-cell;'/>
+                    16:50- 17:30
+                </td>
+                    
+                    <td id="TD22_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    <td id="TD48_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD61_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD74_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD87_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(0, 255, 0)">
+                    <font size="2px"> 11</font><br style='mso-data-placement:same-cell;'/>
+                    18:30- 19:10
+                </td>
+                    <td id="TD10_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="操作系统实验(3109033.01) (刘羽,张倩颖);;;(6-11,北二区 北二教学楼 314)">操作系统实验(3109033.01) (刘羽,张倩颖)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(6-11,北二区 北二教学楼 314)</td>
+                    <td id="TD23_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="3" class="infoTitle" title="软件测试技术(3106007.01) (秦芳云);;;(1-16,北二区 北二教学楼 228j（公共阶梯）)">软件测试技术(3106007.01) (秦芳云)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 228j（公共阶梯）)</td>
+                    <td id="TD36_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD49_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD62_0" style="background-color: rgb(148, 174, 243); font-size: 12px;" rowspan="2" class="infoTitle" title="深度学习(3107089.01) (庚琦川);;;(1-16,北二区 北二教学楼 228j（公共阶梯）)">深度学习(3107089.01) (庚琦川)<br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/><br style='mso-data-placement:same-cell;'/>(1-16,北二区 北二教学楼 228j（公共阶梯）)</td>
+                    <td id="TD75_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD88_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(0, 255, 0)">
+                    <font size="2px"> 12</font><br style='mso-data-placement:same-cell;'/>
+                    19:20- 20:00
+                </td>
+                    
+                    
+                    <td id="TD37_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD50_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    
+                    <td id="TD76_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD89_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+            <tr>
+                <td style="background-color:rgb(0, 255, 0)">
+                    <font size="2px"> 13</font><br style='mso-data-placement:same-cell;'/>
+                    20:10- 20:50
+                </td>
+                    
+                    
+                    <td id="TD38_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD51_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD64_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD77_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+                    <td id="TD90_0" style="backGround-Color:#ffffff;font-size:12px"></td>
+            </tr>
+    </tbody></table>
+<script language="JavaScript">
+	// function CourseTable in TaskActivity.js
+	var language = "zh";
+	var table0 = new CourseTable(2025,91);
+	var unitCount = 13;
+	var index=0;
+	var activity=null;
+		var teachers = [{id:2415,name:"邵振洲",lab:false}];
+		var actTeachers = [{id:2415,name:"邵振洲",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"24228(3107088.01)","机器学习(3107088.01)","474","北二区 北二教学楼 228j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =3*unitCount+2;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =3*unitCount+3;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =3*unitCount+4;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:1504,name:"潘巍",lab:false}];
+		var actTeachers = [{id:1504,name:"潘巍",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"7334(3107043.01)","仿真建模与MATLAB(3107043.01)","495","北二区 北二教学楼 419","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =2*unitCount+0;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =2*unitCount+1;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:6061,name:"庚琦川",lab:false}];
+		var actTeachers = [{id:6061,name:"庚琦川",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"24229(3107089.01)","深度学习(3107089.01)","474","北二区 北二教学楼 228j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =4*unitCount+10;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+11;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:726,name:"刘京锐",lab:false}];
+		var actTeachers = [{id:726,name:"刘京锐",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"6996(3103219.01)","机器人控制(3103219.01)","485","北二区 北二教学楼 330","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =2*unitCount+2;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =2*unitCount+3;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =2*unitCount+4;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:8093,name:"王怀波",lab:false}];
+		var actTeachers = [{id:8093,name:"王怀波",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"6999(3103222.01)","教学设计(3103222.01)","474","北二区 北二教学楼 228j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =1*unitCount+0;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =1*unitCount+1;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =1*unitCount+2;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:6995,name:"杨镒箫",lab:false}];
+		var actTeachers = [{id:6995,name:"杨镒箫",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"28466(3109148.01)","机器学习实验(3109148.01)","477","北二区 北二教学楼 313","00000001111110000000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =2*unitCount+8;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =2*unitCount+9;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:1840,name:"孙众",lab:false}];
+		var actTeachers = [{id:1840,name:"孙众",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"22345(3100109.01)","信息技术教育学科教学法(3100109.01)","474","北二区 北二教学楼 228j（公共阶梯）","00011111100110001000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =4*unitCount+5;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+6;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+7;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:1840,name:"孙众",lab:false}];
+		var actTeachers = [{id:1840,name:"孙众",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"22345(3100109.01)","信息技术教育学科教学法(3100109.01)","1523","校本部 教四楼 301（公共教室）","01100000000000000000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =4*unitCount+5;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+6;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+7;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:1367,name:"刘羽",lab:false}];
+		var actTeachers = [{id:1367,name:"刘羽",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"6906(3103091.01)","网络工程(3103091.01)","478","北二区 北二教学楼 314","00000110101010000000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =0*unitCount+5;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+6;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+7;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+8;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+9;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:1367,name:"刘羽",lab:false}];
+		var actTeachers = [{id:1367,name:"刘羽",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"6906(3103091.01)","网络工程(3103091.01)","474","北二区 北二教学楼 228j（公共阶梯）","01110001010100000000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =0*unitCount+5;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+6;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+7;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:2012,name:"文学",lab:false}];
+		var actTeachers = [{id:2012,name:"文学",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"27631(3700032.07)","习近平新时代中国特色社会主义思想概论(3700032.07)","466","北二区 北二教学楼 108lt（公共礼堂）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =4*unitCount+0;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+1;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =4*unitCount+2;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:6257,name:"秦芳云",lab:false}];
+		var actTeachers = [{id:6257,name:"秦芳云",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"7271(3106007.01)","软件测试技术(3106007.01)","474","北二区 北二教学楼 228j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =1*unitCount+10;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =1*unitCount+11;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =1*unitCount+12;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:2476,name:"张倩颖",lab:false},{id:1367,name:"刘羽",lab:false}];
+		var actTeachers = [{id:1367,name:"刘羽",lab:false},{id:2476,name:"张倩颖",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"24438(3109033.01)","操作系统实验(3109033.01)","478","北二区 北二教学楼 314","00000011111100000000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =0*unitCount+10;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+11;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+12;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:5595,name:"贾瑜",lab:false},{id:8494,name:"李欣蕾",lab:false}];
+		var actTeachers = [{id:5595,name:"贾瑜",lab:false},{id:8494,name:"李欣蕾",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"4129(3043043.04)","教育研究概论(3043043.04)","482","北二区 北二教学楼 322j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =1*unitCount+3;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =1*unitCount+4;
+			table0.activities[index][table0.activities[index].length]=activity;
+		var teachers = [{id:2476,name:"张倩颖",lab:false}];
+		var actTeachers = [{id:2476,name:"张倩颖",lab:false}];
+		var assistant = _.filter(actTeachers, function(actTeacher) {
+			return (_.where(teachers, {id:actTeacher.id,name:actTeacher.name,lab:actTeacher.lab}).length == 0) && (actTeacher.lab == true);
+		});
+		var assistantName = "";
+		if (assistant.length > 0) {
+			assistantName = assistant[0].name;
+			actTeachers = _.reject(actTeachers, function(actTeacher) {
+				return _.where(assistant, {id:actTeacher.id}).length > 0;
+			});
+		}
+		var actTeacherId = [];
+		var actTeacherName = [];
+		for (var i = 0; i < actTeachers.length; i++) {
+			actTeacherId.push(actTeachers[i].id);
+			actTeacherName.push(actTeachers[i].name);
+		}
+			activity = new TaskActivity(actTeacherId.join(','),actTeacherName.join(','),"6894(3103079.01)","操作系统(3103079.01)","472","北二区 北二教学楼 136j（公共阶梯）","01111111111111111000000000000000000000000000000000000",null,null,assistantName,"","");
+			index =0*unitCount+2;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+3;
+			table0.activities[index][table0.activities[index].length]=activity;
+			index =0*unitCount+4;
+			table0.activities[index][table0.activities[index].length]=activity;
+	table0.marshalTable(2,1,24);
+	fillTable(table0,7,13,0);
+</script>
+   		
+   	<div id="tasklesson" style="position: relative;">
+   		    <br style='mso-data-placement:same-cell;'/>
+ 
+<strong>课程列表:</strong>
+<div class="grid">
+
+
+<table id="grid13503794211" class="gridtable">
+<thead class="gridhead">
+
+
+<tr>
+<th width="10%">序号</th>
+<th width="15%">课程号</th>
+<th width="15%">课程名称</th>
+<th width="10%">学分</th>
+<th width="10%">课程序号</th>
+<th width="15%">教师</th>
+<th width="15%">备注</th>
+<th width="10%">操作</th>
+</tr>
+
+</thead>
+
+<tbody id="grid13503794211_data"><tr class="griddata-even">		<td>1</td>
+<td>1281012</td><td>走进中国戏曲(MOOC)</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=695833" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">1281012.01</a>
+</td><td>欧阳启名</td><td>慕课采用网上教学形式，需在线完成互动，答疑，作业，考试等环节，各个环节均合格方可获得学分。同学们可在规定的选课时间内在教务处选课系统里选好课，登陆中国大学慕课，点击学生入口，点击学生认证，完成认证后，进入学校spoc空间，方可上课，并获得学分。所选课程开学第一周的周四上午9:00正式开始。选课的同学务必通过首都师范大学微信门户认证并关注首都师范大学消息，同时请务必下载首都师范大学企业微信，否则将无法进入微信群获得相关课程信息。如有企业微信和微信门户认证问题，可联系艺术与美育研究院225办公室，电话：68903779。未在选课系统选课的同学们也可以通过认证后上课，但是没有学分哦！ 退课请一定要在教务系统完成，仅退慕课网课程无效。网站链接： 中国大学慕课网址： http://www.icourses.cn/school/CNU 企业微信下载地址： https://work.weixin.qq.com 微信门户认证流程： http://dc.cnu.edu.cn/dc/sylm/tzgg/52893.htm</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=695833" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=695833" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>2</td>
+<td>3043043</td><td>教育研究概论</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=700653" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3043043.04</a>
+</td><td>贾瑜,李欣蕾</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=700653" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=700653" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>3</td>
+<td>3100109</td><td>信息技术教育学科教学法</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=697212" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3100109.01</a>
+</td><td>孙众</td><td>      			
+      			<br style='mso-data-placement:same-cell;'/>
+      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=697212" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=697212" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>4</td>
+<td>3100112</td><td>师范生基本功实践</td><td>0</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=693996" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3100112.01</a>
+</td><td>韩红梅</td><td></td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=693996" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=693996" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>5</td>
+<td>3103022</td><td>面向对象程序设计</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=698629" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3103022.01</a>
+</td><td>张磊</td><td></td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=698629" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=698629" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>6</td>
+<td>3103079</td><td>操作系统</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=697696" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3103079.01</a>
+</td><td>张倩颖</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=697696" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=697696" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>7</td>
+<td>3103091</td><td>网络工程</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=693190" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3103091.01</a>
+</td><td>刘羽</td><td>      			
+      			<br style='mso-data-placement:same-cell;'/>
+      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=693190" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=693190" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>8</td>
+<td>3103219</td><td>机器人控制</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=697321" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3103219.01</a>
+</td><td>刘京锐</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=697321" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=697321" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>9</td>
+<td>3103222</td><td>教学设计</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=696157" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3103222.01</a>
+</td><td>王怀波</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=696157" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=696157" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>10</td>
+<td>3106007</td><td>软件测试技术</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=701347" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3106007.01</a>
+</td><td>秦芳云</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=701347" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=701347" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>11</td>
+<td>3107043</td><td>仿真建模与MATLAB</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=701349" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3107043.01</a>
+</td><td>潘巍</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=701349" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=701349" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>12</td>
+<td>3107088</td><td>机器学习</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=694784" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3107088.01</a>
+</td><td>邵振洲</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=694784" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=694784" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>13</td>
+<td>3107089</td><td>深度学习</td><td>2</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=702762" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3107089.01</a>
+</td><td>庚琦川</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=702762" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=702762" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>14</td>
+<td>3109007</td><td>面向对象程序设计实验</td><td>1</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=693029" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3109007.01</a>
+</td><td>张磊</td><td></td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=693029" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=693029" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>15</td>
+<td>3109033</td><td>操作系统实验</td><td>0.5</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=702761" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3109033.01</a>
+</td><td>张倩颖,刘羽</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=702761" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=702761" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>16</td>
+<td>3109148</td><td>机器学习实验</td><td>0.5</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=702232" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3109148.01</a>
+</td><td>杨镒箫</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=702232" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=702232" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-even">		<td>17</td>
+<td>3700030</td><td>习近平新时代中国特色社会主义思想概论实践</td><td>1</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=695807" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3700030.07</a>
+</td><td>文学</td><td></td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=695807" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=695807" target="_blank">教学大纲</a>
+</td></tr><tr class="griddata-odd">		<td>18</td>
+<td>3700032</td><td>习近平新时代中国特色社会主义思想概论</td><td>3</td><td>		<a href="/eams/courseTableForStd!taskTable.action?lesson.id=697483" onclick="return bg.Go(this,null)" title="点击显示单个教学任务具体安排">3700032.07</a>
+</td><td>文学</td><td>      			
+</td><td>			<a href="/eams/courseTableForStd!teachPlanInfo.action?lesson.id=697483" target="_blank">教学日历</a>
+			<a href="/eams/courseTableForStd!syllabuses.action?lesson.id=697483" target="_blank">教学大纲</a>
+</td></tr></tbody>
+</table>
+</div>
+<script type="text/javascript">
+  var clearCheckbox_grid13503794211 = function() {
+    jQuery("#grid13503794211").find(".box:checkbox").removeProp("checked");
+    jQuery("#grid13503794211").find(".gridselect-top :checkbox").removeProp("checked");
+    return true;
+  }
+  
+  page_grid13503794211 = bg.page("/eams/courseTableForStd!courseTable.action","");
+  {
+    var _paramstring = 'setting.kind=std&ids=68164';
+    var _params = _paramstring.split('&');
+    for (var i = 0; i < _params.length; i++) {
+      _params[i] = decodeURIComponent(_params[i]);
+    }
+    _paramstring = _params.join('&');
+    page_grid13503794211.target("",'grid13503794211').action("/eams/courseTableForStd!courseTable.action").addParams(_paramstring).orderBy("null");
+  }
+  bg.ui.grid.init('grid13503794211',page_grid13503794211);
+</script>
+   	</div>   
+   	
+   		<br style='mso-data-placement:same-cell;'/>
+   		    
+   		<br style='mso-data-placement:same-cell;'/>
+</div>
+
+</body>
+</html>

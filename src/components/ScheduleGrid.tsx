@@ -163,13 +163,14 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
               return (
                 <div
                   key={course.id}
-                  className="m-1.5 p-3 rounded-xl cursor-pointer transition-all duration-300 hover:scale-[1.03] flex flex-col gap-1 overflow-hidden z-10 shadow-sm hover:shadow-md relative border"
+                  className={cn(
+                    "m-1.5 p-3 rounded-xl cursor-pointer transition-all duration-300 hover:scale-[1.03] flex flex-col gap-1 overflow-hidden z-10 shadow-sm hover:shadow-md relative border",
+                    course.color || COLORS[0],
+                    !course.isCurrentWeek && "opacity-60 grayscale"
+                  )}
                   style={{ 
                     gridColumn: course.dayOfWeek + 1, 
-                    gridRow: `${course.startPeriod} / span ${span}`,
-                    background: course.isCurrentWeek ? '#ffffff' : '#f3f4f6',
-                    borderColor: course.isCurrentWeek ? '#e5e7eb' : '#d1d5db',
-                    opacity: course.isCurrentWeek ? 1 : 0.6
+                    gridRow: `${course.startPeriod} / span ${span}`
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -181,14 +182,10 @@ export default function ScheduleGrid({ courses, partnerCourses = [], mode, onAdd
                       非本周
                     </div>
                   )}
-                  <div className={cn(
-                    "font-bold text-sm leading-tight break-words",
-                    course.isCurrentWeek ? "text-gray-900" : "text-gray-500"
-                  )}>{course.name}</div>
-                  <div className={cn(
-                    "text-xs mt-auto flex flex-col gap-0.5",
-                    course.isCurrentWeek ? "text-gray-600" : "text-gray-400"
-                  )}>
+                  <div className="font-bold text-sm leading-tight break-words">
+                    {course.name}
+                  </div>
+                  <div className="text-xs mt-auto flex flex-col gap-0.5 opacity-90">
                     <span className="break-words">{course.location}</span>
                     <span className="break-words">{course.teacher}</span>
                   </div>

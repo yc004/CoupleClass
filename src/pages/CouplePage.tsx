@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useStore } from '../store';
 import ScheduleGrid from '../components/ScheduleGrid';
-import { QrCode, Camera, AlertCircle, Loader2, Users, X } from 'lucide-react';
+import { QrCode, Camera, AlertCircle, Loader2, Users, X, HelpCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import QRCode from 'qrcode';
 import jsQR from 'jsqr';
 
@@ -36,11 +36,61 @@ export default function CouplePage() {
   const [showQRCode, setShowQRCode] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [showScanner, setShowScanner] = useState(false);
+  const [showLegend, setShowLegend] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const currentWeek = getCurrentWeek(mySchedule.settings.semesterStartDate);
+  const [viewingWeek, setViewingWeek] = useState<number>(currentWeek || 1);
   const today = formatDate(new Date());
+
+  // 触摸滑动相关
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const scheduleContainerRef = useRef<HTMLDivElement>(null);
+
+  // 当currentWeek变化时，更新viewingWeek
+  useEffect(() => {
+    if (currentWeek !== null) {
+      setViewingWeek(currentWeek);
+    }
+  }, [currentWeek]);
+
+  const handleTouchStart = (e: TouchEvent | React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: TouchEvent | React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        handleNextWeek();
+      } else {
+        handlePrevWeek();
+      }
+    }
+  };
+
+  const handlePrevWeek = () => {
+    setViewingWeek(prev => Math.max(1, prev - 1));
+  };
+
+  const handleNextWeek = () => {
+    const maxWeek = mySchedule.settings.totalWeeks || 20;
+    setViewingWeek(prev => Math.min(maxWeek, prev + 1));
+  };
+
+  const handleBackToCurrentWeek = () => {
+    if (currentWeek !== null) {
+      setViewingWeek(currentWeek);
+    }
+  };
 
   // Generate my share code and save to backend
   const handleShare = async () => {
@@ -190,37 +240,93 @@ export default function CouplePage() {
   }, []);
 
   return (
-    <div className="h-full flex flex-col relative">
-      {/* 左上角日期和教学周信息 */}
-      <div className="absolute top-4 left-4 z-20 flat-card px-4 py-2 rounded-xl shadow-sm">
-        <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">{today}</div>
-        {currentWeek !== null && mySchedule.settings.totalWeeks && (
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            第 {currentWeek} 周 / 共 {mySchedule.settings.totalWeeks} 周
+    <div className="h-full flex flex-col">
+      {/* 顶部信息栏容器 */}
+      <div className="mx-4 mt-4 mb-3 rounded-xl shadow-sm shrink-0">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          {/* 左侧：日期和教学周信息 */}
+          <div className="flex items-center gap-3 flex-1">
+            <div>
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">{today}</div>
+              {currentWeek !== null && mySchedule.settings.totalWeeks && (
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                  当前第 {currentWeek} 周 / 共 {mySchedule.settings.totalWeeks} 周
+                </div>
+              )}
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* 分享按钮 */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {!myShareCode ? (
-          <button
-            onClick={handleShare}
-            disabled={isSharing}
-            className="flat-button flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-xl shadow-sm hover:shadow-md transition-all disabled:opacity-50"
-          >
-            {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <QrCode className="w-4 h-4" />}
-            生成配对二维码
-          </button>
-        ) : (
-          <button
-            onClick={handleShowQRCode}
-            className="flat-button flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-xl shadow-sm hover:shadow-md transition-all"
-          >
-            <QrCode className="w-4 h-4" />
-            显示我的二维码
-          </button>
-        )}
+          {/* 中间：周数切换控制 */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrevWeek}
+              disabled={viewingWeek <= 1}
+              className="flat-button p-2 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              title="上一周"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            </button>
+            
+            <div className="flex flex-col items-center min-w-[80px]">
+              <div className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                第 {viewingWeek} 周
+              </div>
+              {viewingWeek !== currentWeek && currentWeek !== null && (
+                <button
+                  onClick={handleBackToCurrentWeek}
+                  className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  回到本周
+                </button>
+              )}
+            </div>
+
+            <button
+              onClick={handleNextWeek}
+              disabled={viewingWeek >= (mySchedule.settings.totalWeeks || 20)}
+              className="flat-button p-2 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              title="下一周"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            </button>
+          </div>
+
+          {/* 右侧：操作按钮 */}
+          <div className="flex items-center gap-2">
+            {/* 分享/二维码按钮 */}
+            {!myShareCode ? (
+              <button
+                onClick={handleShare}
+                disabled={isSharing}
+                className="flat-button flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-xl transition-all disabled:opacity-50"
+              >
+                {isSharing ? <Loader2 className="w-4 h-4 animate-spin" /> : <QrCode className="w-4 h-4" />}
+                <span className="hidden sm:inline">生成配对二维码</span>
+                <span className="sm:hidden">生成二维码</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleShowQRCode}
+                className="flex items-center gap-2 px-4 py-2 right-3 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-xl transition-all"
+              >
+                <QrCode className="w-4 h-4" />
+                <span className="hidden sm:inline">显示我的二维码</span>
+                <span className="sm:hidden">我的二维码</span>
+              </button>
+            )}
+
+            {/* 帮助按钮（仅在已配对时显示） */}
+            {partnerSchedule && (
+              <button
+                onClick={() => setShowLegend(true)}
+                className="flat-button p-2 rounded-xl transition-all"
+                title="查看图例"
+              >
+                <HelpCircle className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+              </button>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* 二维码显示模态框 */}
@@ -357,42 +463,86 @@ export default function CouplePage() {
           </div>
         </div>
       ) : (
-        <div className="flex-1 min-h-0 flex flex-col pt-20">
-          <div className="flat-card flex flex-wrap items-center justify-between p-3 md:p-4 rounded-xl shadow-sm gap-2 shrink-0 mb-3 mx-4">
-            <div className="flex flex-wrap items-center gap-3 md:gap-5">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-400 border border-blue-500" />
-                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">我的课程</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-pink-400 border border-pink-500" />
-                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">TA的课程</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-emerald-400 border border-emerald-500" />
-                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">共同空闲</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-purple-400 border border-purple-500" />
-                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300">一起上课</span>
+        <div className="flex-1 min-h-0 flex flex-col">
+          {/* 图例模态框 */}
+          {showLegend && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60" onClick={() => setShowLegend(false)}>
+              <div className="flat-modal rounded-2xl p-6 max-w-sm w-full" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">课表图例</h3>
+                  <button
+                    onClick={() => setShowLegend(false)}
+                    className="flat-button p-2 rounded-xl"
+                  >
+                    <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 flex items-center justify-center shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-blue-400 border border-blue-500" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">我的课程</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">只有你有课的时间段</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800 flex items-center justify-center shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-pink-400 border border-pink-500" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">TA的课程</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">只有TA有课的时间段</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 flex items-center justify-center shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-purple-400 border border-purple-500" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">一起上课 ✨</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">你们同时上同一门课</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-emerald-400 border border-emerald-500" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900 dark:text-gray-100 text-sm">共同空闲</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">你们都没有课的时间段</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  <button
+                    onClick={() => {
+                      setPartnerSchedule(null);
+                      setPartnerCode(null);
+                      setShowLegend(false);
+                    }}
+                    className="w-full flat-button text-sm text-red-600 dark:text-red-400 px-4 py-2 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 transition-all"
+                  >
+                    断开连接
+                  </button>
+                </div>
               </div>
             </div>
-            <button
-              onClick={() => {
-                setPartnerSchedule(null);
-                setPartnerCode(null);
-              }}
-              className="flat-button text-xs md:text-sm text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg hover:scale-105 transition-all ml-auto"
-            >
-              断开连接
-            </button>
-          </div>
-          <div className="flex-1 min-h-0">
+          )}
+
+          <div 
+            ref={scheduleContainerRef}
+            className="flex-1 min-h-0"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <ScheduleGrid
               courses={mySchedule.courses}
               partnerCourses={partnerSchedule.courses}
               mode="couple"
-              currentWeek={currentWeek}
+              currentWeek={viewingWeek}
             />
           </div>
         </div>

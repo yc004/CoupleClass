@@ -222,6 +222,34 @@ export default function CourseModal({ isOpen, onClose, initialData, courseId }: 
             )}
           </div>
 
+          {/* 课程颜色 */}
+          <div>
+            <label className="block font-semibold text-gray-900 dark:text-gray-100 mb-3 text-sm">课程颜色</label>
+            <div className="grid grid-cols-4 gap-3">
+              {COLORS.map((color) => (
+                <button
+                  key={color}
+                  type="button"
+                  onClick={() => setFormData({ ...formData, color })}
+                  className={cn(
+                    'h-12 rounded-xl border-2 transition-all hover:scale-105',
+                    color,
+                    formData.color === color 
+                      ? 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400 dark:ring-offset-slate-800 scale-105' 
+                      : 'opacity-70 hover:opacity-100'
+                  )}
+                  title={color}
+                >
+                  {formData.color === color && (
+                    <svg className="w-5 h-5 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="pt-4 flex justify-between items-center border-t border-gray-200 dark:border-gray-700">
               {courseId ? (
                 <button

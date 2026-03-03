@@ -13,6 +13,7 @@ interface AppState {
   addCourse: (course: Omit<Course, 'id'>) => void;
   updateCourse: (id: string, course: Partial<Course>) => void;
   deleteCourse: (id: string) => void;
+  clearAllCourses: () => void;
   updateSettings: (settings: Partial<Settings>) => void;
   setPartnerSchedule: (schedule: ScheduleData | null) => void;
   setMyShareCode: (code: string) => void;
@@ -65,6 +66,14 @@ export const useStore = create<AppState>()(
           mySchedule: {
             ...state.mySchedule,
             courses: state.mySchedule.courses.filter((c) => c.id !== id),
+          },
+        })),
+
+      clearAllCourses: () =>
+        set((state) => ({
+          mySchedule: {
+            ...state.mySchedule,
+            courses: [],
           },
         })),
 
