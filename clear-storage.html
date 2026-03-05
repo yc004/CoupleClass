@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>清除存储</title>
+</head>
+<body>
+  <h1>清除本地存储</h1>
+  <button onclick="clearAll()">清除所有存储</button>
+  <div id="result"></div>
+  
+  <script>
+    function clearAll() {
+      localStorage.clear();
+      sessionStorage.clear();
+      document.getElementById('result').innerHTML = '<p style="color: green;">已清除所有存储！请关闭此页面并刷新主页面。</p>';
+    }
+  </script>
+</body>
+</html>

@@ -1,8 +1,7 @@
 import { Outlet, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
-import { Calendar, Users, Settings as SettingsIcon } from 'lucide-react';
+import { Calendar, Users, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SettingsModal from './SettingsModal';
-import { cn } from '../lib/utils';
 import { useStore } from '../store';
 
 export default function Layout() {
@@ -11,7 +10,19 @@ export default function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   
-  const { mySchedule, myShareCode, partnerCode, setPartnerCode, setPartnerSchedule } = useStore();
+  const { user, logout, mySchedule, myShareCode, partnerCode, setPartnerCode, setPartnerSchedule } = useStore();
+
+  // 登出处理
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      localStorage.removeItem('token');
+      logout();
+      navigate('/login');
+    } catch (err) {
+      // 静默处理错误
+    }
+  };
 
   // Handle partner code from URL
   useEffect(() => {
@@ -32,7 +43,9 @@ export default function Layout() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: myShareCode, data: mySchedule })
-      }).catch(console.error);
+      }).catch(() => {
+        // 静默处理错误
+      });
     }
   }, [mySchedule, myShareCode]);
 
@@ -68,17 +81,8 @@ export default function Layout() {
     <div className="h-screen h-[100dvh] font-sans flex flex-col overflow-hidden relative bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100">
       {/* 全屏课表内容 */}
       <main className="flex-1 overflow-hidden flex flex-col relative">
-        <Outlet />
+        <Outlet context={{ setIsSettingsOpen, handleLogout }} />
       </main>
-
-      {/* 浮动设置按钮 */}
-      <button 
-        onClick={() => setIsSettingsOpen(true)}
-        className="flat-button absolute top-4 right-4 z-30 p-3 rounded-xl shadow-sm hover:shadow-md transition-all"
-        title="设置"
-      >
-        <SettingsIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-      </button>
 
       {/* 浮动模式切换按钮 */}
       <button

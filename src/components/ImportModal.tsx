@@ -567,15 +567,20 @@ export default function ImportModal({ isOpen, onClose }: ImportModalProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
-                onClick={() => setStep('input')}
-                className="flat-card p-6 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all text-left group"
+                disabled
+                className="flat-card p-6 rounded-2xl transition-all text-left group opacity-50 cursor-not-allowed relative"
               >
                 <div className="flex flex-col items-center text-center gap-3">
-                  <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 flex items-center justify-center">
                     <Download className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">网页导入</h3>
+                    <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">
+                      网页导入
+                      <span className="ml-2 text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 px-2 py-0.5 rounded-full">
+                        开发中
+                      </span>
+                    </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       通过内嵌网页登录教务系统并同步课表
                     </p>
@@ -606,9 +611,8 @@ export default function ImportModal({ isOpen, onClose }: ImportModalProps) {
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mt-6">
               <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 text-sm">💡 推荐方式</h3>
               <ul className="text-xs text-gray-700 dark:text-gray-300 space-y-1 list-disc list-inside">
-                <li>如果教务系统支持导出课表，推荐使用"文件导入"</li>
-                <li>如果需要在线登录，可以使用"网页导入"</li>
-                <li>两种方式都支持大多数常见教务系统</li>
+                <li>推荐使用"文件导入"，支持大多数教务系统</li>
+                <li>网页导入功能正在开发中，敬请期待</li>
               </ul>
             </div>
 
